@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "PrepMind AI"
+version = "1.0.0"
+id = "artifacts/prepmind-ai"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 21793
+
+[services.development]
+run = "pnpm --filter @workspace/prepmind-ai run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/prepmind-ai", "run", "build" ]
+publicDir = "artifacts/prepmind-ai/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "21793"
+BASE_PATH = "/"
