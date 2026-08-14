@@ -1,15 +1,13 @@
-
 import express, { type Express } from "express";
 import cors from "cors";
-import * as pinoHttpModule from "pino-http";
-const pinoHttp = pinoHttpModule.default;
+import pinoHttp from "pino-http";
 import router from "./routes";
 import { logger } from "./lib/logger";
 
 const app: Express = express();
 
 app.use(
-  pinoHttp({
+  pinoHttp.default({
     logger,
     serializers: {
       req(req: any) {
@@ -35,4 +33,3 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/api", router);
 
 export default app;
-
